@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'netfix.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'netfix.urls'
@@ -128,3 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Authentication settings
+LOGIN_URL = '/register/login/'
+LOGOUT_REDIRECT_URL = '/'
