@@ -1,0 +1,16 @@
+# Virtual Environment
+venv/
+venv_py38/
+wsl_venv/
+env/
+wsl_env_django31/
+.env
+.venv/
+
+# Python
+__pycache__/
+
+# Static files collected by Django
+staticfiles/
+static_root/
+static_cdn/
