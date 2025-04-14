@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 from users.models import User, Company, Customer
-from services.models import Service
+from services.models import Service, ServiceRequest
 from datetime import datetime
 
 
@@ -18,9 +18,9 @@ def customer_profile(request, name):
             if user.is_company:
                 return redirect('company_profile', name=name)
             raise Http404("User is not a customer")
-            
-        # Service history is not implemented yet
-        service_history = []
+        
+        # Fetch service requests for this customer
+        service_requests = ServiceRequest.objects.filter(user=user).order_by('-requested_at')
         
         try:
             customer = Customer.objects.get(user=user)
@@ -30,7 +30,7 @@ def customer_profile(request, name):
         
         return render(request, 'users/profile.html', {
             'user': user, 
-            'sh': service_history,
+            'service_requests': service_requests,
             'birth_date': birth_date
         })
     except User.DoesNotExist:

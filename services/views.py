@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
+from django.contrib import messages
+from .models import Service, ServiceRequest
+from .forms import RequestServiceForm
 
-from users.models import Company, Customer, User
+from users.models import Company
 
 from .models import Service
 from .forms import CreateNewService, RequestServiceForm
@@ -22,15 +25,12 @@ def create(request):
     if not request.user.is_company:
         return redirect('services_list')
     
-    # Get the company object for the logged-in user
     company = Company.objects.get(user=request.user)
     
     # Determine available field choices based on company's field
     if company.field == 'All in One':
-        # All in One companies can offer services in any field
         choices = Service.choices
     else:
-        # Other companies can only offer services in their specific field
         choices = [(company.field, company.field)]
     
     if request.method == 'POST':
@@ -61,4 +61,19 @@ def service_field(request, field):
 
 
 def request_service(request, id):
-    return render(request, 'services/request_service.html', {})
+    service = get_object_or_404(Service, id=id)
+    if request.method == 'POST':
+        form = RequestServiceForm(request.POST)
+        if form.is_valid():
+            service_request = ServiceRequest.objects.create(
+                user=request.user,
+                service=service,
+                address=form.cleaned_data['address'],
+                hours=form.cleaned_data['hours']
+            )
+            messages.success(request, f"Service '{service.name}' requested successfully!")
+            # Fix: 'service_detail' should be 'index'
+            return redirect('index', id=service.id)
+    else:
+        form = RequestServiceForm()
+    return render(request, 'services/request_service.html', {'form': form, 'service': service})
