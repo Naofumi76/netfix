@@ -72,8 +72,7 @@ def request_service(request, id):
                 hours=form.cleaned_data['hours']
             )
             messages.success(request, f"Service '{service.name}' requested successfully!")
-            # Fix: 'service_detail' should be 'index'
-            return redirect('index', id=service.id)
+            return redirect('/')
     else:
         form = RequestServiceForm()
     return render(request, 'services/request_service.html', {'form': form, 'service': service})

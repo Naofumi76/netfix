@@ -38,7 +38,7 @@ class ServiceRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     address = models.CharField(max_length=200)
-    hours = models.DecimalField(decimal_places=1, max_digits=4)
+    hours = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(24)])
     requested_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

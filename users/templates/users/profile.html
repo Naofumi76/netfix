@@ -20,12 +20,12 @@
             <ul class="service-requests-list">
                 {% for req in service_requests %}
                     <div class="service-request" style="display: ruby;">
-                        <p><a href="/services/{{req.service.id}}">{{req.service.name}}</a> ({{req.service.field}}),</p>
-                        <p><strong>Address:</strong> {{req.address}},</p>
-                        <p><strong>Hours:</strong> {{req.hours|floatformat:1}},</p>
-                        <p><strong>Total Cost:</strong> {{req.hours|multiply:req.service.price_hour}}€,</p>
-                        <p><strong>Requested on:</strong> {{req.requested_at|date:"F j, Y"}},</p>
-                        <p class="provider">by <a href="/company/{{req.service.company.user}}">{{req.service.company.user}}</a></p>
+                        <h3><a href="/services/{{req.service.id}}">{{req.service.name}}</a> ({{req.service.field}})</h3>
+                        <p><strong>Address:</strong> {{req.address}}</p>
+                        <p><strong>Hours:</strong> {{req.hours}}</p>
+                        <p><strong>Total Cost:</strong> {{req.hours|multiply:req.service.price_hour}}€</p>
+                        <p><strong>Requested on:</strong> {{req.requested_at|date:"F j, Y"}}</p>
+                        <p class="provider" style="margin-top: 8px; font-style: italic;">by <a href="/company/{{req.service.company.user}}">{{req.service.company.user}}</a></p>
                     </div>
                     <div class="line"></div>
                 {% endfor %}
