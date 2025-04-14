@@ -1,0 +1,35 @@
+<!-- services/templates/services/create.html -->
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Create Service
+{% endblock %}
+
+{% block content %}
+    <p class="title">Create a New Service</p>
+    
+    {% if user.is_company %}
+        <div class="create-service-form">
+            <form method="POST">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <div class="form-errors">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p class="error_message">{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                {{ form.as_p }}
+                
+                <button type="submit">Create Service</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Only companies can create services.</p>
+        <a href="/services/">Back to services list</a>
+    {% endif %}
+{% endblock %}
