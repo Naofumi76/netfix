@@ -8,7 +8,8 @@
         <h5>by <a href="/company/{{service.company.user}}">{{service.company.user}}</a></h5>
     </div>
     <h3>{{service.field}}</h3>
-    <p style="text-align: left;">{{service.description}}</p>
+    <p style="text-align: left;""><strong>Created on:</strong> {{service.date|date:"F j, Y"}}</p>
+    <p style="text-align: left;"><strong>Description:</strong> {{service.description}}</p>
     {% if request.user.is_customer %}
         <a href="/services/{{service.id}}/request_service/" class="like_button">Request Service</a>
     {% endif %}

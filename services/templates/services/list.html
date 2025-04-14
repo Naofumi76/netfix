@@ -9,10 +9,22 @@
     {% endif %}
     <div class='services_list'>
         {% if services %}
-            {% for service in services.all %}
-            {% endfor %}
+            <ul class='services_list'>
+                {% for service in services %}
+                    <div style="display: ruby;">
+                        <div class='service_list_info'>
+                            <li><a href="/services/{{service.id}}">{{ service.name }}</a>-- {{ service.price_hour }}€/hour</li>
+                            <pre>{{ service.description }}</pre>
+                        </div>
+                        <p style="margin: 0;">by <a href="/company/{{service.company.user}}">{{service.company.user}}</a></p>
+                    </div>
+                    {% if forloop.counter != services.count %}
+                        <div class="line"></div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         {% else %}
-            <h2>Sorry No services available yet</h2>
+            <h2>Sorry. No services available yet</h2>
         {% endif %}
      </div>
 {% endblock %}
