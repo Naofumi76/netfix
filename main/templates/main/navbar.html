@@ -23,6 +23,10 @@
             {% elif request.user.is_company %}
                 <li><a href="/company/{{ request.user.username }}">Profile</a></li>
             {% endif %}
+            <li><a href="/logout/">Logout</a></li>
+        {% else %}
+            <li><a href="/register/login/">Login</a></li>
+            <li><a href="/register/">Register</a></li>
         {% endif %}
     </ul>
 </nav>
