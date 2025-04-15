@@ -19,14 +19,15 @@
         {% if service_requests %}
             <ul class="service-requests-list">
                 {% for req in service_requests %}
-                    <div class="service-request" style="display: ruby;">
-                        <h3><a href="/services/{{req.service.id}}">{{req.service.name}}</a> ({{req.service.field}})</h3>
-                        <p><strong>Address:</strong> {{req.address}}</p>
-                        <p><strong>Hours:</strong> {{req.hours}}</p>
-                        <p><strong>Total Cost:</strong> {{req.hours|multiply:req.service.price_hour}}€</p>
-                        <p><strong>Requested on:</strong> {{req.requested_at|date:"F j, Y"}}</p>
-                        <p class="provider" style="margin-top: 8px; font-style: italic;">by <a href="/company/{{req.service.company.user}}">{{req.service.company.user}}</a></p>
+                    <div class="service-request">
+                        <h3 style="text-align: center;"><a href="/services/{{req.service.id}}">{{req.service.name}}</a> ({{req.service.field}})</h3>
+                        <p style="margin: 0;"><strong>Address:</strong> {{req.address}}</p>
+                        <p style="margin: 0;"><strong>Hours:</strong> {{req.hours}}</p>
+                        <p style="margin: 0;"><strong>Total Cost:</strong> {{req.hours|multiply:req.service.price_hour}}€</p>
+                        <p style="margin: 0;"><strong>Requested on:</strong> {{req.requested_at|date:"F j, Y"}}</p>
+                        <br>
                     </div>
+                    <p class="provider" style="margin-top: 0px; font-style: italic;">by <a href="/company/{{req.service.company.user}}">{{req.service.company.user}}</a></p>
                     <div class="line"></div>
                 {% endfor %}
             </ul>
