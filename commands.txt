@@ -1,8 +1,0 @@
-source venv_py38/bin/activate
-
-python setup_db
-
-python manage.py makemigrations services/
-python manage.py migrate
-
-python manage.py runserver 0.0.0.0:8000
