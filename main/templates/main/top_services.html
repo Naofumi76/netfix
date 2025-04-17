@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+{% block title %}
+    Top Requested Services
+{% endblock %}
+
+{% block content %}
+    <p class="title">Top 10 Most Requested Services</p>
+    
+    {% if top_services %}
+        <div class="services-list">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #ee5e4b; color: white;">
+                        <th style="padding: 10px; text-align: center;">Rank</th>
+                        <th style="padding: 10px; text-align: left;">Service</th>
+                        <th style="padding: 10px; text-align: center;">Requests</th>
+                        <th style="padding: 10px; text-align: left;">Company</th>
+                        <th style="padding: 10px; text-align: left;">Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in top_services %}
+                    <tr>
+                        <td style="padding: 10px; text-align: center;">{{ forloop.counter }}</td>
+                        <td style="padding: 10px;">
+                            <a href="/services/{{ service.service_id }}">{{ service.name }}</a>
+                        </td>
+                        <td style="padding: 10px; text-align: center;">{{ service.request_count }}</td>
+                        <td style="padding: 10px;">
+                            <a href="/company/{{ service.company_username }}">{{ service.company_username }}</a>
+                        </td>
+                        <td style="padding: 10px;">{{ service.field }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No service requests data available yet.</p>
+    {% endif %}
+{% endblock %}

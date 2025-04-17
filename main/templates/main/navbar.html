@@ -17,6 +17,7 @@
                 <li><a href="/services/water-heaters">Water Heaters</a></li>
             </ul>
         </li>
+        <li><a href="/top-services/">Top Services</a></li>
         {% if request.user.is_authenticated %}
             {% if request.user.is_customer %}
                 <li><a href="/customer/{{ request.user.username }}">Profile</a></li>

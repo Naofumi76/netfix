@@ -7,7 +7,30 @@
     <p class="title">Service Request Details</p>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <p>
+            {{ form.address.label_tag }}
+            {{ form.address }}
+            {% if form.address.errors %}
+                <span class="error_message">{{ form.address.errors }}</span>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.hours.label_tag }}
+            <input 
+                type="number" 
+                name="{{ form.hours.html_name }}" 
+                id="{{ form.hours.auto_id }}" 
+                min="1" 
+                max="24" 
+                placeholder="Number of hours" 
+                style="width: 15vw;"
+                {% if form.hours.value %}value="{{ form.hours.value }}"{% endif %}
+                required
+            >
+            {% if form.hours.errors %}
+                <span class="error_message">{{ form.hours.errors }}</span>
+            {% endif %}
+        </p>
         <button type="submit">Request</button>
     </form>
 {% endblock %}
